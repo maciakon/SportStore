@@ -24,6 +24,8 @@ namespace SportStore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
+                
             }
 
             app.Run(async (context) =>
