@@ -11,6 +11,7 @@ namespace SportStore.Models
         public static void EnsurePopulated(IApplicationBuilder app)
         {
             var context = app.ApplicationServices.GetRequiredService<ApplicationDbContext>();
+            // this is going to help us on production
             context.Database.Migrate();
             if(context.Products.Any()) return;
 
