@@ -25,7 +25,8 @@ namespace SportStore
             {
                 app.UseDeveloperExceptionPage();
                 app.UseStatusCodePages();
-                
+                app.UseStaticFiles();
+                app.UseMvcWithDefaultRoute();
             }
 
             app.Run(async (context) =>

@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C1A80368-C9E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportStore", "src\SportStore\SportStore.csproj", "{9F981393-942D-4345-A8A9-D42C03F2D1AF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{211204DC-39B3-428E-A1A6-0D76FA1E7104}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportStore.Tests", "tests\SportStore.Tests\SportStore.Tests.csproj", "{F71C50DD-B83B-4D4C-BE50-92E871CE4748}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +36,21 @@ Global
 		{9F981393-942D-4345-A8A9-D42C03F2D1AF}.Release|x64.Build.0 = Release|Any CPU
 		{9F981393-942D-4345-A8A9-D42C03F2D1AF}.Release|x86.ActiveCfg = Release|Any CPU
 		{9F981393-942D-4345-A8A9-D42C03F2D1AF}.Release|x86.Build.0 = Release|Any CPU
+		{F71C50DD-B83B-4D4C-BE50-92E871CE4748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F71C50DD-B83B-4D4C-BE50-92E871CE4748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F71C50DD-B83B-4D4C-BE50-92E871CE4748}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F71C50DD-B83B-4D4C-BE50-92E871CE4748}.Debug|x64.Build.0 = Debug|Any CPU
+		{F71C50DD-B83B-4D4C-BE50-92E871CE4748}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F71C50DD-B83B-4D4C-BE50-92E871CE4748}.Debug|x86.Build.0 = Debug|Any CPU
+		{F71C50DD-B83B-4D4C-BE50-92E871CE4748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F71C50DD-B83B-4D4C-BE50-92E871CE4748}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F71C50DD-B83B-4D4C-BE50-92E871CE4748}.Release|x64.ActiveCfg = Release|Any CPU
+		{F71C50DD-B83B-4D4C-BE50-92E871CE4748}.Release|x64.Build.0 = Release|Any CPU
+		{F71C50DD-B83B-4D4C-BE50-92E871CE4748}.Release|x86.ActiveCfg = Release|Any CPU
+		{F71C50DD-B83B-4D4C-BE50-92E871CE4748}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9F981393-942D-4345-A8A9-D42C03F2D1AF} = {C1A80368-C9ED-4823-AC5B-6FDCD3B2A009}
+		{F71C50DD-B83B-4D4C-BE50-92E871CE4748} = {211204DC-39B3-428E-A1A6-0D76FA1E7104}
 	EndGlobalSection
 EndGlobal
