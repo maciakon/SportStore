@@ -4,6 +4,7 @@ using System.Linq;
 using Moq;
 using SportStore.Controllers;
 using SportStore.Models;
+using SportStore.Models.ViewModels;
 using Xunit;
 
 namespace SportStore.Tests
@@ -27,12 +28,37 @@ namespace SportStore.Tests
 
             var productController = new ProductController(fakeProductsRepo.Object);
 
-            var results = productController.List(2).ViewData.Model as IEnumerable<Product>;
-            var resultList = results.ToList();
+            var results = productController.List(2).ViewData.Model as ProductListViewModel;
+            var resultList = results.Products.ToList();
 
             Assert.True(resultList.Count == 4);
             var productsOnSecondPage = resultList.Where(product => product.ProductId > 4);
             Assert.True(productsOnSecondPage.Count() == 4);
         }
+
+        [Fact]
+        public void CanSendPaginationViewModel()
+        {
+            Mock<IProductsRepository> mock = new Mock<IProductsRepository>();
+            mock.Setup(m => m.Products).Returns(
+                new Product[]{
+                    new Product { ProductId = 1, Name = "P1" },
+                    new Product { ProductId = 2, Name = "P2" },
+                    new Product { ProductId = 3, Name = "P3" },
+                    new Product { ProductId = 4, Name = "P4" },
+                    new Product { ProductId = 5, Name = "P5" },
+                }
+            );
+
+            var productController = new ProductController(mock.Object) {PageSize = 3};
+            var result = productController.List(2).ViewData.Model as ProductListViewModel;
+
+            Assert.Equal(2, result.PagingInfo.CurrentPage);
+            Assert.Equal(2, result.PagingInfo.TotalPages);
+            Assert.Equal(5, result.PagingInfo.TotalItems);
+            Assert.Equal(3, result.PagingInfo.ItemsPerPage);
+        }
+
+
     }
 }
