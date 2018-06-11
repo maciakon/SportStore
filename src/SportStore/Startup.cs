@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,7 +40,15 @@ namespace SportStore
                 app.UseDeveloperExceptionPage();
                 app.UseStatusCodePages();
                 app.UseStaticFiles();
-                app.UseMvc(routes => {routes.MapRoute(name:"default", template:"{controller=Product}/{action=List}/{id?}");});
+                app.UseMvc(routes => {
+                    routes.MapRoute(
+                        name:"pagination", 
+                        template:"Products/Page{page}", 
+                        defaults: new {Controller = "Product", action="List"});
+
+                    routes.MapRoute(
+                        name:"default", 
+                        template:"{controller=Product}/{action=List}/{id?}");});
             }
             SeedData.EnsurePopulated(app);
         }
