@@ -7,12 +7,15 @@
         <title>SportStore</title>
     </head>
     <body>
-        <div class="navbar navbar-inverse" role="navigation">
+         <div class="container">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <a class="navbar-brand" href="#">Sports Store</a>
-        </div>
-        <div class="row panel">
-            <div id="categories" class="col-xs-4">Put something useful later.</div>
-            <div class="col-xs-8"> @RenderBody() </div>
+        </nav>
+            <p></p>
+            <div class="row">
+                <div id="categories" class="col-sm-4">Put something useful later.</div>
+                <div class="col-sm-8">@RenderBody()</div>
+            </div>
         </div>
     </body>
 </html>
