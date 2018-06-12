@@ -80,7 +80,5 @@ namespace SportStore.Tests
             Assert.True(result[1].Name == "P3");
             Assert.Equal(2, result.Length);
         }
-
-
     }
 }

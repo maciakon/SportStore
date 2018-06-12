@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -11,7 +12,6 @@ namespace SportStore.Infrastructure
     public class PaginationTagHelper : TagHelper
     {
         private readonly IUrlHelperFactory _urlHelperFactory;
-
         public PaginationTagHelper(IUrlHelperFactory  urlHelperFactory)
         {
             _urlHelperFactory = urlHelperFactory;
@@ -22,6 +22,10 @@ namespace SportStore.Infrastructure
         public ViewContext ViewContext {get; set;}
         public PagingInfo PageModel { get; set; }
         public string PageActions { get; set; }
+
+        [HtmlAttributeName(DictionaryAttributePrefix= "page-url-")]
+        public Dictionary<string, object> PageUrlValues { get; set; } = new Dictionary<string, object>();
+        
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             IUrlHelper urlHelper = _urlHelperFactory.GetUrlHelper(ViewContext);
@@ -38,7 +42,7 @@ namespace SportStore.Infrastructure
 
                 TagBuilder tag = new TagBuilder("a");
                 tag.AddCssClass("page-link");
-                tag.Attributes["href"] = urlHelper.Action(PageActions, new { page = i});
+                tag.Attributes["href"] = urlHelper.Action(PageActions, PageUrlValues);
                 tag.InnerHtml.Append(i.ToString());
                 listItemTag.InnerHtml.AppendHtml(tag);
                 output.Content.AppendHtml(listItemTag);
