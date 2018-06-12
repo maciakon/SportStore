@@ -28,7 +28,7 @@ namespace SportStore.Tests
 
             var productController = new ProductController(fakeProductsRepo.Object);
 
-            var results = productController.List(2).ViewData.Model as ProductListViewModel;
+            var results = productController.List(null, 2).ViewData.Model as ProductListViewModel;
             var resultList = results.Products.ToList();
 
             Assert.True(resultList.Count == 4);
@@ -51,12 +51,34 @@ namespace SportStore.Tests
             );
 
             var productController = new ProductController(mock.Object) {PageSize = 3};
-            var result = productController.List(2).ViewData.Model as ProductListViewModel;
+            var result = productController.List(null, 2).ViewData.Model as ProductListViewModel;
 
             Assert.Equal(2, result.PagingInfo.CurrentPage);
             Assert.Equal(2, result.PagingInfo.TotalPages);
             Assert.Equal(5, result.PagingInfo.TotalItems);
             Assert.Equal(3, result.PagingInfo.ItemsPerPage);
+        }
+
+        [Fact]
+        public void CanFilterProducts()
+        {
+            Mock<IProductsRepository> mock = new Mock<IProductsRepository>();
+            mock.Setup(m => m.Products).Returns(
+                new Product[]{
+                    new Product { ProductId = 1, Name = "P1", Category="C1" },
+                    new Product { ProductId = 2, Name = "P2", Category="C2" },
+                    new Product { ProductId = 3, Name = "P3", Category="C1" },
+                    new Product { ProductId = 4, Name = "P4", Category="C2" },
+                    new Product { ProductId = 5, Name = "P5", Category="C3" },
+                }
+            );
+
+            var productController = new ProductController(mock.Object) {PageSize = 3};
+            var result = (productController.List("C1", 1).ViewData.Model as ProductListViewModel).Products.ToArray();
+
+            Assert.True(result[0].Name == "P1");
+            Assert.True(result[1].Name == "P3");
+            Assert.Equal(2, result.Length);
         }
 
 

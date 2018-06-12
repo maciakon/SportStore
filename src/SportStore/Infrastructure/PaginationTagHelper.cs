@@ -29,13 +29,18 @@ namespace SportStore.Infrastructure
             for(int i = 1; i <= PageModel.TotalPages; i++)
             {
                 listItemTag = new TagBuilder("li");
-                listItemTag.AddCssClass("page-item");
+
+                if(PageModel.CurrentPage == i)
+                {
+                    listItemTag.AddCssClass("page-item active");
+                } 
+                else listItemTag.AddCssClass("page-item");
+
                 TagBuilder tag = new TagBuilder("a");
                 tag.AddCssClass("page-link");
                 tag.Attributes["href"] = urlHelper.Action(PageActions, new { page = i});
                 tag.InnerHtml.Append(i.ToString());
                 listItemTag.InnerHtml.AppendHtml(tag);
-                // result.InnerHtml.AppendHtml(listItemTag);
                 output.Content.AppendHtml(listItemTag);
             }
         }
