@@ -39,7 +39,7 @@ namespace SportStore.Infrastructure
                     listItemTag.AddCssClass("page-item active");
                 } 
                 else listItemTag.AddCssClass("page-item");
-
+                PageUrlValues["page"]=i;
                 TagBuilder tag = new TagBuilder("a");
                 tag.AddCssClass("page-link");
                 tag.Attributes["href"] = urlHelper.Action(PageActions, PageUrlValues);
