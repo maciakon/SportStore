@@ -1,6 +1,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SportStore.Models;
+using SportStore.Models.ViewModels;
 
 namespace SportStore.Components
 {
@@ -13,7 +14,10 @@ namespace SportStore.Components
         }
         public IViewComponentResult Invoke() 
         { 
-            return View(_repository.Products.Select(x => x.Category).Distinct().OrderBy(x=>x));
+            var currentCategory = (string)RouteData?.Values["category"];
+            var allCategories = _repository.Products.Select(x => x.Category).Distinct().OrderBy(x => x);
+            return View(
+                new NavigationMenuViewModel(allCategories, currentCategory));
         }
     }
 }

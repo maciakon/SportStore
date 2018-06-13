@@ -1,16 +1,29 @@
-@model IEnumerable<string>
+@model NavigationMenuViewModel
 
 <a class="btn btn-block btn-secondary"
 asp-action="List"
 asp-controller="Product"
 asp-route-category="">Home</a>
 
-@foreach (string category in Model)
+@foreach (string category in Model.Categories)
 {
-    <a class="btn btn-block btn-secondary"
+    if(category == Model.CurrentCategory)
+    {
+        <a class="btn btn-block btn-primary"
     asp-action="List"
     asp-controller="Product"
     asp-route-category="@category"
     asp-route-page="1">@category
     </a>
+    }
+    else
+    {
+        <a class="btn btn-block btn-secondary"
+            asp-action="List"
+            asp-controller="Product"
+            asp-route-category="@category"
+            asp-route-page="1">@category
+        </a>
+    }
+    
 }
