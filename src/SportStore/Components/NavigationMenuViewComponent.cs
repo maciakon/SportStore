@@ -16,6 +16,7 @@ namespace SportStore.Components
         { 
             var currentCategory = (string)RouteData?.Values["category"];
             var allCategories = _repository.Products.Select(x => x.Category).Distinct().OrderBy(x => x);
+            ViewBag.SelectedCategory = RouteData.Values["category"];
             return View(
                 new NavigationMenuViewModel(allCategories, currentCategory));
         }

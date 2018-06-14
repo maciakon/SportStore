@@ -6,24 +6,10 @@ asp-controller="Product"
 asp-route-category="">Home</a>
 
 @foreach (string category in Model.Categories)
-{
-    if(category == Model.CurrentCategory)
-    {
-        <a class="btn btn-block btn-primary"
+{  <a class="btn btn-block @(category == ViewBag.SelectedCategory ? "btn-primary" : "btn-secondary")"
     asp-action="List"
     asp-controller="Product"
     asp-route-category="@category"
     asp-route-page="1">@category
-    </a>
-    }
-    else
-    {
-        <a class="btn btn-block btn-secondary"
-            asp-action="List"
-            asp-controller="Product"
-            asp-route-category="@category"
-            asp-route-page="1">@category
-        </a>
-    }
-    
+    </a>    
 }
