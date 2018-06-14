@@ -4,6 +4,6 @@ namespace SportStore.Models
     {
         public int CartlineId { get; set; }
         public Product Product { get; set; }
-        public int Quantinty { get; set; }
+        public int Quantity { get; set; }
     }
 }

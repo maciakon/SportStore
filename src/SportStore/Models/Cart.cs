@@ -16,11 +16,11 @@ namespace SportStore.Models
 
             if(line == null)
             {
-                lineCollection.Add(new CartLine{Product = product, Quantinty = quantity});
+                lineCollection.Add(new CartLine{Product = product, Quantity = quantity});
             }
             else
             {
-                line.Quantinty++;
+                line.Quantity++;
             }
 
         }
@@ -30,9 +30,8 @@ namespace SportStore.Models
             lineCollection.RemoveAll(l => l.Product.ProductId == product.ProductId);
         }
 
-        public virtual decimal ComputeTotalValue() => lineCollection.Sum(e => e.Product.Price * e.Quantinty);
-
+        public virtual decimal ComputeTotalValue() => lineCollection.Sum(e => e.Product.Price * e.Quantity);
         public virtual void Clear() => lineCollection.Clear();
-        public virtual IEnumerable<CartLine> lines => lineCollection;
+        public virtual IEnumerable<CartLine> Lines => lineCollection;
     }
 }
