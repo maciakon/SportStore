@@ -14,7 +14,7 @@ namespace SportStore.Controllers
             _ordersRepository = ordersRepository;
             _cart = cart;
         }
-        
+
         public ViewResult Checkout()
         {
             return View(new Order());
@@ -26,15 +26,15 @@ namespace SportStore.Controllers
             if(_cart.Lines.Count() == 0)
             {
                 ModelState.AddModelError("", "Sorry, your cart is empty!");
-                if(ModelState.IsValid)
-                {
-                    order.Lines = _cart.Lines.ToArray();
-                    _ordersRepository.SaveOrder(order);
-                    return RedirectToAction(nameof(Completed));
-                }
+                
+            }
+            if(ModelState.IsValid)
+            {
+                order.Lines = _cart.Lines.ToArray();
+                 _ordersRepository.SaveOrder(order);
+                 return RedirectToAction(nameof(Completed));
             }
             return View(order);
-            
         }
 
         public ViewResult Completed()
