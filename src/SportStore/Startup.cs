@@ -29,6 +29,8 @@ namespace SportStore
             services.AddDbContext<ApplicationDbContext>(options => 
                 options.UseSqlite(Configuration["Data:SportStoreProducts:ConnectionString"]));
             services.AddTransient<IProductsRepository, EFProductsRepository>();
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
