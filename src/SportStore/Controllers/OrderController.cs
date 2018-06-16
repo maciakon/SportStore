@@ -9,5 +9,11 @@ namespace SportStore.Controllers
         {
             return View(new Order());
         }
+
+        /*[HttpPost]
+        public IActionResult Checkout(Order order)
+        {
+
+        }*/
     }
 }
