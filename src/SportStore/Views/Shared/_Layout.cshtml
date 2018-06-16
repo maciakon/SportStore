@@ -10,6 +10,9 @@
          <div class="container">
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <a class="navbar-brand" href="#">Sports Store</a>
+            <div class="float-right">
+                @await Component.InvokeAsync("CartSummary")
+            </div>
         </nav>
             <p></p>
             <div class="row">
