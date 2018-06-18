@@ -1,7 +1,7 @@
 @model IEnumerable<Product>
 
 @{
-    ViewBag.Title = "All products"
+    ViewBag.Title = "All products";
     Layout = "_AdminLayout";
 }
 
@@ -21,13 +21,13 @@
             <td class="text-center">
                 <form asp-action="Delete" method="POST">
                     <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-productId="@product.ProductId">Edit</a>
-                    <input class="hidden" name="ProductId" value="@product.ProductId">
+                    <input type="hidden" name="ProductId" value="@product.ProductId">
                     <button class="btn btn-sm btn-danger" type="submit">Delete</button>
                 </form>
             </td>
         </tr>
     }
-    <div class="text-center">
-        <a asp-action="Create" class="btn btn-primary">Add product</a>
-    </div>
 </table>
+<div class="text-center">
+    <a asp-action="Create" class="btn btn-primary">Add product</a>
+</div>
