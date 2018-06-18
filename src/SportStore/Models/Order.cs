@@ -21,7 +21,6 @@ namespace SportStore.Models
         public string Line1 { get; set; }
         public string Line2 { get; set; }
         public string Line3 { get; set; }
-        
         [Required(ErrorMessage="Please enter a city name")]
         public string City { get; set; }
         public string State { get; set; }
@@ -30,6 +29,5 @@ namespace SportStore.Models
         [Required(ErrorMessage="Please enter a country name")]
         public string Country { get; set; }
         public bool GiftWrap { get; set; }
-
     }
 }
