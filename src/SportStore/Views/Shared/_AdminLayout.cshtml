@@ -3,7 +3,14 @@
     <head>
         <meta name="viewport" content="width=device-width" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        
         <title>@ViewBag.Title</title>
+        <style>
+            .input-validation-error {
+                border-color: red;
+                background-color: #fee;
+            }
+        </style>
     </head>
     <body class="card">
         <div class="card-header text-white bg-secondary">
@@ -17,4 +24,7 @@
             @RenderBody()
         </div>
     </body>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
 </html>

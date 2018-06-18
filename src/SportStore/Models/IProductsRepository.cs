@@ -6,5 +6,7 @@ namespace SportStore.Models
     {
          IEnumerable<Product> Products { get; }
          void Save(Product product);
+
+         Product Delete(int productId);
     }
 }

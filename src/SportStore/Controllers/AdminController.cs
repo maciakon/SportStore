@@ -12,7 +12,7 @@ namespace SportStore.Controllers
             _repository = repository;
         }
         public ViewResult Index() => View(_repository.Products);
-        
+
         public ViewResult Edit(int productId)
         {
             var editedProduct = _repository.Products.FirstOrDefault(p => p.ProductId == productId);
@@ -22,6 +22,7 @@ namespace SportStore.Controllers
         [HttpPost]
         public IActionResult Edit(Product product)
         {
+            // a simple client side validation is also implemented
             if(ModelState.IsValid)
             {
                 _repository.Save(product);
@@ -34,5 +35,20 @@ namespace SportStore.Controllers
                 return View(product);
             }
         }
+
+        public IActionResult Delete(int productId)
+        {
+            if(ModelState.IsValid)
+            {
+                var removedProduct = _repository.Delete(productId);
+                if(removedProduct != null)
+                {
+                    TempData["message"] = $"{removedProduct.Name} has been removed.";
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        public ViewResult Create() => View("Edit", new Product());
     }
 }
