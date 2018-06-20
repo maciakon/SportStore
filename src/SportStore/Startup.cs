@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,9 @@ namespace SportStore
         {
             services.AddDbContext<ApplicationDbContext>(options => 
                 options.UseSqlite(Configuration["Data:SportStoreProducts:ConnectionString"]));
+            services.AddDbContext<AppIdentityDbContext>(options => 
+                options.UseSqlite(Configuration["Data:SportStoreIdentity:ConnectionString"]));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddTransient<IProductsRepository, EFProductsRepository>();
             services.AddTransient<IOrdersRepository, EFOrdersRepository>();
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
@@ -46,6 +50,7 @@ namespace SportStore
                 app.UseStatusCodePages();
                 app.UseStaticFiles();
                 app.UseSession();
+                app.UseIdentity();
                 app.UseMvc(routes => {
 
                     routes.MapRoute(
@@ -74,6 +79,7 @@ namespace SportStore
                         template:"{controller=Product}/{action=List}/{id?}");});
             }
             SeedData.EnsurePopulated(app);
+            EntitySeedData.EnsurePopulated(app);
         }
     }
 }
