@@ -19,7 +19,7 @@ namespace SportStore.Models
             if(user == null)
             {
                 user = new IdentityUser("admin");
-                await userManager.CreateAsync(user);
+                await userManager.CreateAsync(user, adminPassword);
             }
         }
     }

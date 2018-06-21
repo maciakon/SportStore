@@ -44,7 +44,7 @@ namespace SportStore.Controllers
             return View(loginModel);
         }
 
-        public async Task<RedirectResult> Logout (string returnUrl)
+        public async Task<RedirectResult> Logout (string returnUrl = "/")
         {
             await _signInManager.SignOutAsync();
             return Redirect(returnUrl);
