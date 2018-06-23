@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace SportStore.Models
@@ -11,6 +12,8 @@ namespace SportStore.Models
 
         public static async void EnsurePopulated(IApplicationBuilder app)
         {
+            var context = app.ApplicationServices.GetRequiredService<AppIdentityDbContext>();
+            context.Database.Migrate();
             UserManager<IdentityUser> userManager = 
             app.ApplicationServices.GetRequiredService<UserManager<IdentityUser>>();
 

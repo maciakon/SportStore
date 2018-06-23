@@ -27,10 +27,20 @@ namespace SportStore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => 
+            // Use SQL Database if in Azure, otherwise, use SQLite
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+            {
+                services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductsDb")));
+                services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdentityDb")));
+            }
+            else
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration["Data:SportStoreProducts:ConnectionString"]));
-            services.AddDbContext<AppIdentityDbContext>(options => 
-                options.UseSqlite(Configuration["Data:SportStoreIdentity:ConnectionString"]));
+                services.AddDbContext<AppIdentityDbContext>(options =>
+                    options.UseSqlite(Configuration["Data:SportStoreIdentity:ConnectionString"]));
+            }
+            
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddTransient<IProductsRepository, EFProductsRepository>();
             services.AddTransient<IOrdersRepository, EFOrdersRepository>();
