@@ -48,36 +48,47 @@ namespace SportStore
             {
                 app.UseDeveloperExceptionPage();
                 app.UseStatusCodePages();
-                app.UseStaticFiles();
-                app.UseSession();
-                app.UseIdentity();
-                app.UseMvc(routes => {
-
-                    routes.MapRoute(
-                        name: null, 
-                        template:"{category}/Page{page:int}", 
-                        defaults: new {Controller = "Product", action="List"});
-
-                    routes.MapRoute(
-                        name: null, 
-                        template:"Page{page:int}", 
-                        defaults: new {Controller = "Product", action="List", page="1"});
-                    
-                    routes.MapRoute(
-                        name: null, 
-                        template:"{category}", 
-                        defaults: new {Controller = "Product", action="List", page="1"});
-
-
-                    routes.MapRoute(
-                        name: null, 
-                        template:"", 
-                        defaults: new {Controller = "Product", action="List", page="1"});
-
-                    routes.MapRoute(
-                        name:null, 
-                        template:"{controller=Product}/{action=List}/{id?}");});
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+            }
+            app.UseStaticFiles();
+            app.UseSession();
+            app.UseAuthentication();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "Error",
+                    template: "Error",
+                    defaults: new { Controller = "Error", action = "Error" });
+
+                routes.MapRoute(
+                    name: null,
+                    template: "{category}/Page{page:int}",
+                    defaults: new { Controller = "Product", action = "List" });
+
+                routes.MapRoute(
+                    name: null,
+                    template: "Page{page:int}",
+                    defaults: new { Controller = "Product", action = "List", page = "1" });
+
+                routes.MapRoute(
+                    name: null,
+                    template: "{category}",
+                    defaults: new { Controller = "Product", action = "List", page = "1" });
+
+
+                routes.MapRoute(
+                    name: null,
+                    template: "",
+                    defaults: new { Controller = "Product", action = "List", page = "1" });
+
+                routes.MapRoute(
+                    name: null,
+                    template: "{controller=Product}/{action=List}/{id?}");
+            });
+
             SeedData.EnsurePopulated(app);
             EntitySeedData.EnsurePopulated(app);
         }
