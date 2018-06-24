@@ -20,7 +20,11 @@ namespace SportStore
 
         public Startup(IHostingEnvironment env)
         {
-            Configuration = new ConfigurationBuilder().SetBasePath(env.ContentRootPath).AddJsonFile("appsettings.json").Build();
+            Configuration = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsetings.{env.EnvironmentName}.json")
+                .Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -30,13 +34,15 @@ namespace SportStore
             // Use SQL Database if in Azure, otherwise, use SQLite
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
             {
-                services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductsDb")));
-                services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdentityDb")));
+                services.AddDbContext<ApplicationDbContext>(options => 
+                    options.UseSqlServer(Configuration.GetConnectionString("ProductsDb")));
+                services.AddDbContext<AppIdentityDbContext>(options => 
+                    options.UseSqlServer(Configuration.GetConnectionString("IdentityDb")));
             }
             else
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration["Data:SportStoreProducts:ConnectionString"]));
+                    options.UseSqlite(Configuration["Data:SportStoreProducts:ConnectionString"]));
                 services.AddDbContext<AppIdentityDbContext>(options =>
                     options.UseSqlite(Configuration["Data:SportStoreIdentity:ConnectionString"]));
             }
