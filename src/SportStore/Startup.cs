@@ -23,7 +23,7 @@ namespace SportStore
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsetings.{env.EnvironmentName}.json")
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
                 .Build();
         }
 
