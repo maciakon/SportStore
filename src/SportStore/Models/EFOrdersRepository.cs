@@ -22,7 +22,7 @@ namespace SportStore.Models
             {
                 _dbContext.Orders.Add(order);
             }
-            _dbContext.SaveChanges();
+            _dbContext.SaveChanges(); 
         }
     }
 }
