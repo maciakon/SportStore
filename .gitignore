@@ -37,3 +37,6 @@ msbuild.wrn
 .vs/
 src/SportStore/SportStore.db
 src/SportStore/SportStore.db
+doc/Konrad_Macialek_TI.aux
+doc/Konrad_Macialek_TI.dvi
+doc/Konrad_Macialek_TI.log

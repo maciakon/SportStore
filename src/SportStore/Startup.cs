@@ -66,7 +66,8 @@ namespace SportStore
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseDeveloperExceptionPage();
+                // app.UseExceptionHandler("/Error");
             }
             app.UseStaticFiles();
             app.UseSession();
