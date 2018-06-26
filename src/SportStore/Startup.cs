@@ -30,20 +30,23 @@ namespace SportStore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var productsConnectionString = Configuration.GetConnectionString("ProductsDb");
+            var identityConnectionString = Configuration.GetConnectionString("IdentityDb");
+
             // Use SQL Database if in Azure, otherwise, use SQLite
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
             {
                 services.AddDbContext<ApplicationDbContext>(options => 
-                    options.UseSqlServer(Configuration.GetConnectionString("ProductsDb")));
+                    options.UseSqlServer(productsConnectionString));
                 services.AddDbContext<AppIdentityDbContext>(options => 
-                    options.UseSqlServer(Configuration.GetConnectionString("IdentityDb")));
+                    options.UseSqlServer(identityConnectionString));
             }
             else
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlite(Configuration["Data:SportStoreProducts:ConnectionString"]));
+                    options.UseSqlite(productsConnectionString));
                 services.AddDbContext<AppIdentityDbContext>(options =>
-                    options.UseSqlite(Configuration["Data:SportStoreIdentity:ConnectionString"]));
+                    options.UseSqlite(identityConnectionString));
             }
             
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
@@ -66,8 +69,7 @@ namespace SportStore
             }
             else
             {
-                app.UseDeveloperExceptionPage();
-                //app.UseExceptionHandler("/Error");/
+                app.UseExceptionHandler("/Error");
             }
             app.UseStaticFiles();
             app.UseSession();
